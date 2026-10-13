@@ -1,0 +1,36 @@
+# XcodeGen 工程描述。生成 Xcode 工程：
+#   brew install xcodegen
+#   xcodegen generate
+#   open BrowserPicker.xcodeproj
+name: BrowserPicker
+
+options:
+  bundleIdPrefix: com.example
+  deploymentTarget:
+    macOS: "13.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    CODE_SIGN_IDENTITY: "-"            # 本地 ad-hoc 签名；上架或分发请换成你自己的 Team / 证书
+    ENABLE_HARDENED_RUNTIME: YES
+
+targets:
+  BrowserPicker:
+    type: application
+    platform: macOS
+    sources:
+      - path: Sources
+      - path: Resources
+    settings:
+      base:
+        PRODUCT_NAME: BrowserPicker
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.BrowserPicker   # 建议改成你自己的反向域名
+        INFOPLIST_FILE: Config/Info.plist
+        GENERATE_INFOPLIST_FILE: NO
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        COMBINE_HIDPI_IMAGES: YES
+        ENABLE_APP_SANDBOX: NO         # 不使用沙盒：需要枚举已安装应用并带参数启动浏览器
